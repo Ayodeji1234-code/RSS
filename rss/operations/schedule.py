@@ -95,46 +95,51 @@ def add_timetable_entry():
 
 
 def view_student_timetable(student_name):
+    if not os.path.exists(TIMETABLE_FILE):
+        st.warning("⚠️ No timetable file found yet.")
+        return
+
     with open(TIMETABLE_FILE, "r") as f:
         timetable = json.load(f)
 
-    student_records = timetable["students"].get(student_name, [])
+    student_records = timetable.get("students", {}).get(student_name, [])
 
     if not student_records:
         st.warning(f"⚠️ No timetable found for {student_name}")
         return
 
-    rows = []
-    for record in student_records:  # ✅ loop through list of dicts
-        rows.append({
-            "Day": record.get("day", "N/A"),
-            "Time": record.get("time", "N/A"),
-            "Teacher": record.get("teacher", "N/A")
-        })
+    rows = [
+        {"Day": record.get("day", "N/A"),
+         "Time": record.get("time", "N/A"),
+         "Teacher": record.get("teacher", "N/A")}
+        for record in student_records
+    ]
 
     df = pd.DataFrame(rows)
     df.index = df.index + 1
-
     st.subheader(f"📅 Timetable for {student_name}")
     st.dataframe(df, use_container_width=True)
 
 
 def view_teacher_schedule(teacher_name):
+    if not os.path.exists(TIMETABLE_FILE):
+        st.warning("⚠️ No timetable file found yet.")
+        return
+
     with open(TIMETABLE_FILE, "r") as f:
         timetable = json.load(f)
 
-    teacher_records = timetable["teachers"].get(teacher_name, [])
+    teacher_records = timetable.get("teachers", {}).get(teacher_name, [])
     if not teacher_records:
         st.warning(f"📂 No timetable found for {teacher_name}")
         return
 
-    rows = []
-    for slot in teacher_records:  # iterate list directly
-        rows.append({
-            "Day": slot.get("day", ""),
-            "Time": slot.get("time", ""),
-            "Student": slot.get("student", "")
-        })
+    rows = [
+        {"Day": slot.get("day", ""),
+         "Time": slot.get("time", ""),
+         "Student": slot.get("student", "")}
+        for slot in teacher_records
+    ]
 
     df = pd.DataFrame(rows)
     df.index = df.index + 1
@@ -172,3 +177,4 @@ def view_all_schedules():
 
     st.subheader("📅 All Schedules")
     st.dataframe(df, use_container_width=True)
+
