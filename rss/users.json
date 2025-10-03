@@ -1,0 +1,38 @@
+{
+    "Ogunnaike Michael": {
+        "username": "Mike",
+        "password": "plnh123",
+        "role": "Student",
+        "stage": "Innovator",
+        "teacher": "Okenla Qahar"
+    },
+    "Ayangbile Samuel": {
+        "username": "Sam",
+        "password": "vdp123",
+        "role": "Student",
+        "stage": "Innovator",
+        "teacher": "Okenla Qahar"
+    },
+    "Fowodu Emmanuel": {
+        "username": "Emma",
+        "password": "hppd123",
+        "role": "Student",
+        "stage": "Creator",
+        "teacher": "Ogunnaike Ayomide"
+    },
+    "Okenla Qahar": {
+        "username": "Qahar",
+        "password": "tdkdu123",
+        "role": "Teacher"
+    },
+    "Ogunnaike Ayomide": {
+        "username": "Ayo",
+        "password": "dbr123",
+        "role": "Teacher"
+    },
+    "Olarinde Temiloluwa": {
+        "username": "Temi",
+        "password": "whpl123",
+        "role": "Admin"
+    }
+}
